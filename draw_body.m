@@ -26,7 +26,9 @@ rotation_matrix = makehgtform('zrotate', chest_abdomen_angle);
 set(abdomen,'Matrix',translation_matrix*rotation_matrix);
 
 body_object = draw_sph_pure_matlab(animal_size * abdomen_length * abdomen_ecc);
-translation_matrix = makehgtform('translate', [ animal_size*(chest_length+abdomen_length), 0, 0 ]);
+body_translation = animal_size*chest_length*[1 0 0] + ...
+    animal_size*abdomen_length * [cos(chest_abdomen_angle) sin(chest_abdomen_angle) 0];
+translation_matrix = makehgtform('translate', body_translation);
 set(body_object,'Matrix',translation_matrix);
 
 %%% Group all the body surfaces together into a single object

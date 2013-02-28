@@ -65,9 +65,11 @@ abdomen_ecc = shape_params(find(strcmp({shape_params.name},'abd ecc'))).value;
 
 chest_length = shape_params(find(strcmp({shape_params.name},'chest length'))).value;
 abdomen_length = shape_params(find(strcmp({shape_params.name},'abd length'))).value;
+chest_abdomen_angle = pi/180*shape_params(find(strcmp({shape_params.name},'chest abd ang'))).value;
 
 hips_xyz_location = shoulders_xyz_location + ...
-   [ animal_size*(chest_length+abdomen_length) 0 0 ];
+   animal_size*chest_length*[1 0 0] + ...
+   animal_size*abdomen_length * [ cos(chest_abdomen_angle) sin(chest_abdomen_angle) 0 ];
   
 %%% Draw the hind legs, and translate them to meet the hips
 left_hind_leg = draw_hind_leg;
