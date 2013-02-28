@@ -31,7 +31,7 @@ set(lower_leg,'Matrix',lower_leg_translation_matrix*rotation_matrix);
 
 hand_object = draw_hand;
 hand_shape_scaling_matrix = makehgtform('scale',[1, hand_eccentricity_2, hand_eccentricity_1]);
-hand_size_scaling_matrix = makehgtform('scale',animal_size*lower_foreleg_radius*[1 1 1]);
+%hand_size_scaling_matrix = makehgtform('scale',animal_size*lower_foreleg_radius*[1 1 1]);
 scaled_lower_leg_length = animal_size * lower_foreleg_length; 
 translation_along_lower_leg = makehgtform('translate', ...
    scaled_lower_leg_length*[ cos(lower_leg_angle) sin(lower_leg_angle) 0 ]);
@@ -41,7 +41,9 @@ translate_forward_part_of_hand_length = makehgtform('translate', ...
 hand_translation_matrix = lower_leg_translation_matrix * ...
                           translation_along_lower_leg * ...
                           translate_forward_part_of_hand_length;
-set(hand_object,'Matrix',hand_translation_matrix*hand_shape_scaling_matrix*hand_size_scaling_matrix);
+%set(hand_object,'Matrix',hand_translation_matrix*hand_shape_scaling_matrix*hand_size_scaling_matrix);
+set(hand_object,'Matrix',hand_translation_matrix*hand_shape_scaling_matrix);
+
 
 %%% Group the three fore-leg objects together into a single object
 fore_leg = hgtransform;
