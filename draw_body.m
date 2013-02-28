@@ -13,14 +13,14 @@ chest_abdomen_angle = pi/180*shape_params(find(strcmp({shape_params.name},'chest
 chest_ecc = shape_params(find(strcmp({shape_params.name},'chest ecc'))).value;
 alpha = shape_params(find(strcmp({shape_params.name},'alpha'))).value;
 
-r1 = animal_size * chest_length*abdomen_ecc;
-r2 = animal_size * chest_length*abdomen_ecc;
+r_abd = animal_size * chest_length*abdomen_ecc;
+r_chest = animal_size * chest_length*chest_ecc;
 bulge_or_waist_factor = 0.2*abs(alpha - 0.5)/0.5;
 
 chest_object1 = draw_sph_pure_matlab(animal_size * chest_length * chest_ecc);
-chest_object2 = draw_geon_pure_matlab(2, r1, r2, bulge_or_waist_factor, animal_size*chest_length*1.05);
+chest_object2 = draw_geon_pure_matlab(2, r_chest*0.99, r_abd, bulge_or_waist_factor, animal_size*chest_length*1.05);
 
-abdomen = draw_geon_pure_matlab(1, r1, r2, bulge_or_waist_factor, animal_size*abdomen_length);
+abdomen = draw_geon_pure_matlab(1, r_abd, r_abd, bulge_or_waist_factor, animal_size*abdomen_length);
 translation_matrix = makehgtform('translate', [ animal_size*chest_length, 0, 0 ]);
 rotation_matrix = makehgtform('zrotate', chest_abdomen_angle);
 set(abdomen,'Matrix',translation_matrix*rotation_matrix);
