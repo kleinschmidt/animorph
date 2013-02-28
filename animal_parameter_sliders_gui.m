@@ -114,7 +114,8 @@ for slider_num = 1:num_sliders,
    end;
 end;
 
-make_animal_using_global_params;
+%make_animal_using_global_params;
+make_animal(shape_params);
 
 end
 
