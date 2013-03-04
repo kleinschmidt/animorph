@@ -112,4 +112,41 @@ image(tiles/256)
 
 %% read in all animals and compute average vector
 
+animals = {'dog', 'hippo', 'horse', 'monkey', 'mouse', 'sheep', 'tiger'};
+
+animal_params = [];
+for i = 1:length(animals)
+    params = open(['animals/' animals{i} '.mat']);
+    animal_params(i, :) = param_struct_to_vector(params.shape_params);
+end
+
+mean_animal = mean(animal_params);
+make_animal(param_vector_to_struct(mean_animal));
+
+%% tiles of all animals from mean animal
+
+ntiles = 5;
+tileres = [200 200];
+
+all_tiles = zeros(length(animals) * tileres(2), ntiles * tileres(1), 3);
+
+make_animal(param_vector_to_struct(mean_animal));
+axis_lims = axis();
+
+for i = 1:length(animals)
+    [cont, tiles, params_mat] = make_animal_continuum_tiles(mean_animal, animal_params(i, :), tileres, ntiles, axis_lims, [-.25 1]);
+    all_tiles((1:tileres(2)) + (i-1)*tileres(2), :, :) = cont;
+end
+
+%%
+figure(3)
+set(gcf, 'position', [100, 100, size(all_tiles, 2)/2, size(all_tiles, 1)/2]);
+set(gca, 'position', [0 0 1 1]);
+
+image(all_tiles / 256)
+
+%imwrite(all_tiles/256, 'animals-from-average.png');
+
+%% two-dimensional animal space
+
 
