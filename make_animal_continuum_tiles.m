@@ -39,12 +39,17 @@ tiles = cell(ntiles, 1);
 
 param_mat = (1-lambdas)' * animal_1 + lambdas' * animal_2;
 
+% create temporary, invisible figure to draw tiles
+trim_pixels = round(tile_res / 10);
+hfig = figure('Visible', 'off', 'Position', [100 100 tile_res + trim_pixels*2]);
+
 for lambda = lambdas
     mix_params = param_vector_to_struct(param_mat(lambdas==lambda, :));
-    make_animal(mix_params, [.5 .5 .5]);
-    tiles{lambdas==lambda} = grab_animal_im(tile_res, axis_limits);
+    make_animal(mix_params, [.5 .5 .5], hfig);
+    tiles{lambdas==lambda} = grab_animal_im(tile_res, hfig, axis_limits, trim_pixels);
 end
 
+close(hfig);
 
 %% assemble tiles
 continuum = zeros(tile_res(2), ntiles * tile_res(1), 3);

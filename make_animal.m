@@ -1,5 +1,5 @@
 % /* The whole IGUANA */
-function make_animal(params, color)
+function make_animal(params, color, fig_h)
 
 global surface_colour
 if (~ exist('surface_colour')) 
@@ -7,7 +7,6 @@ if (~ exist('surface_colour'))
 end
 
 global shape_params
-
 
 if (nargin > 1) 
     old_surface_colour = surface_colour;
@@ -26,7 +25,22 @@ end
 shape_params(find(strcmp({shape_params.name},'alpha'))).value = 1; % The variable called alpha
 alpha = shape_params(find(strcmp({shape_params.name},'alpha'))).value;
 
-figure(1);
+% set up figure and axis
+
+% if no handle specified, set to 1
+if (nargin < 3)
+    fig_h = 1;
+end
+
+% check if figure fig_h has already been opened
+if any(get(0, 'Children') == fig_h)
+    % if it has, set fig_h as current figure
+    set(0, 'CurrentFigure', fig_h);
+else 
+    % if not, open it
+    figure(fig_h);
+end
+
 clf;
 axis('equal');
 %%%%%%%%%%%%%% Set up the lighting and view angle for the whole scene

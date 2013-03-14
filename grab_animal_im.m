@@ -1,23 +1,32 @@
-function im = grab_animal_im(imres, axis_limits, trim_pixels)
+function im = grab_animal_im(imres, fig_h, axis_limits, trim_pixels)
 
 if (nargin < 1) 
     imres = [500 500];
 end
 
-if nargin < 3
+if nargin < 4
     trim_pixels = 20;
+end
+if length(trim_pixels) == 1
+    trim_pixels = [1 1] * trim_pixels;
+end
+
+% default figure is 1, since this is the default used by make_animal
+if nargin < 2
+    fig_h = 1;
 end
 
 imres_adj = imres + 2*trim_pixels;
 
-set(1, 'position', [100, 100, imres_adj]);
+set(fig_h, 'position', [100, 100, imres_adj]);
 set(gca, 'position', [0, 0, 1, 1]);
-if (nargin > 1)
+if (nargin > 2)
     axis(axis_limits);
 end
 axis off
-im = frame2im(getframe(1));
+%im = frame2im(getframe(fig_h));
+im = opengl_cdata(fig_h);
 
-im = im((1:imres(1)) + trim_pixels, (1:imres(2)) + trim_pixels, :);
+im = im((1:imres(1)) + trim_pixels(1), (1:imres(2)) + trim_pixels(2), :);
 
 end
