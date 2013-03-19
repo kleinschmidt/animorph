@@ -4,7 +4,7 @@
 %   Make images from points in grid in subspace
 
 %% Initialization
-cd ~/code/animal-morph
+cd ~/code/animal-morph 
 
 global surface_colour;
 surface_colour = [.5 .5 .5];
@@ -173,6 +173,8 @@ image(all_tiles / 256)
 %dir1 = animal_1 - origin;
 %dir2 = animal_2 - origin;
 
+origin = mean_animal;
+
 % make the two directions chest/abdomen length vs. size
 [~, dir1] = feature_to_param_vector({'chest length', 'abd length'});
 dir1 = dir1 / 4;
@@ -214,6 +216,8 @@ axis_limits = all_axis(all_vols==max(all_vols), :);
 
 %%
 
+tile_res = [200 200];
+
 angle_lambdas = (0:1/(ntiles(1)-1):1) * diff(angle_lambda_range) + angle_lambda_range(1);
 dist_lambdas = (0:1/(ntiles(2)-1):1) * diff(dist_lambda_range) + dist_lambda_range(1);
 
@@ -231,16 +235,73 @@ end
 
 %%
 
-for i = 1:ntiles(1)
-    for j = 1:ntiles(2)
-        animal_array((1:tile_res(2)) + (j-1)*tile_res(2), (1:tile_res(1)) + (i-1)*tile_res(1), :) = ...
-            tiles{i,j};
+animal_array = assemble_tiles(tiles, 3, 2);
+
+
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Make an array of animals specifying limits in polar coordinates but
+% plotting in euclidean grid
+
+angle_lambda_range = [0, pi/2];
+
+dist_lambda_range = [-0.75 0.75];
+
+[X, Y] = meshgrid(-1:.1:1, -1:.1:1);
+
+plot(X(:), Y(:), 'o')
+
+circ = sqrt(X(:).^2 + Y(:).^2) <= 1;
+plot(X(circ), Y(circ), 'o')
+
+theta_lims = [0, 2*pi];
+
+thlim = mod(theta_lims, 2*pi);
+
+thxy = acos(X(:) ./ sqrt(X(:).^2 + Y(:).^2)) .* (1 - 2*(Y(:)<0));
+
+%slice = (X(:)==0) & (Y(:)==0) | (prod([theta_lims(1) - thxy theta_lims(2) - thxy]')' <= 0);
+slice = (X(:)==0) & (Y(:)==0) | mod(thxy(:)-thlim(1), 2*pi) <= mod(diff(thlim), 2*pi);
+
+
+plot(X(:), Y(:), 'go')
+hold on;
+plot(X(slice), Y(slice), 'o')
+hold off;
+
+%% 
+
+ntiles = 9;
+tile_res = [200 200];
+
+x = 0:1/(ntiles-1):1;
+y = 0:1/(ntiles-1):1;
+
+[X Y] = meshgrid(x, y);
+
+origin = mean_animal;
+dir1 = animal_params(1, :) - origin;
+dir2 = animal_params(6, :) - origin;
+
+max_dist = 1;
+tile_mask = sqrt(X.^2 + Y.^2) <= max_dist;
+
+
+tiles = cell(ntiles);
+
+
+% create temporary, invisible figure to draw tiles
+hfig = figure('Visible', 'off', 'Position', [100 100 tile_res]);
+
+for i = 1:ntiles
+    for j = 1:ntiles
+        if tile_mask(i,j)
+            param_vec = origin + dir1 * x(i) + dir2 * y(j);
+            make_animal(param_vector_to_struct(param_vec),  [.5 .5 .5], hfig);
+            tiles{i,j} = grab_animal_im(tile_res, hfig);
+        end
     end
 end
 
+close(hfig);
 
-figure(3);
-set(gcf, 'position', [100, 100, size(animal_array,2)/3, size(animal_array,1)/3]);
-set(gca, 'position', [0 0 1 1])
-
-image(animal_array / 256);
+assemble_tiles(tiles)

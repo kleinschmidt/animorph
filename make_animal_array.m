@@ -54,3 +54,18 @@ for dist = dist_lambdas
         tiles{angle_lambdas==angle, dist_lambdas==dist} = grab_animal_im(tile_res, 1, axis_limits, 20);
     end
 end
+
+
+for i = 1:ntiles(1)
+    for j = 1:ntiles(2)
+        animal_array((1:tile_res(2)) + (j-1)*tile_res(2), (1:tile_res(1)) + (i-1)*tile_res(1), :) = ...
+            tiles{i,j};
+    end
+end
+
+
+figure(3);
+set(gcf, 'position', [100, 100, size(animal_array,2)/3, size(animal_array,1)/3]);
+set(gca, 'position', [0 0 1 1])
+
+image(animal_array / 256);
