@@ -1,6 +1,10 @@
 % /* The whole IGUANA */
 function make_animal(params, color, fig_h)
 
+% compress parameters outside the range, starting at 10% of the range on
+% either side for the rolloff.
+params = validate_params(params, 0.1);
+
 global surface_colour
 if (~ exist('surface_colour')) 
     surface_colour = [1 0.65 0.1];
