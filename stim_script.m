@@ -270,11 +270,11 @@ hold off;
 
 %% 
 
-ntiles = 9;
+ntiles = 5;
 tile_res = [200 200];
 
-x = 0:1/(ntiles-1):1;
-y = 0:1/(ntiles-1):1;
+x = -1:1/(ntiles-1):1;
+y = -1:1/(ntiles-1):1;
 
 [X Y] = meshgrid(x, y);
 
@@ -286,14 +286,14 @@ max_dist = 1;
 tile_mask = sqrt(X.^2 + Y.^2) <= max_dist;
 
 
-tiles = cell(ntiles);
+tiles = cell(length(x), length(y));
 
 
 % create temporary, invisible figure to draw tiles
 hfig = figure('Visible', 'off', 'Position', [100 100 tile_res]);
 
-for i = 1:ntiles
-    for j = 1:ntiles
+for i = 1:length(x)
+    for j = 1:length(y)
         if tile_mask(i,j)
             param_vec = origin + dir1 * x(i) + dir2 * y(j);
             make_animal(param_vector_to_struct(param_vec),  [.5 .5 .5], hfig);
@@ -303,5 +303,37 @@ for i = 1:ntiles
 end
 
 close(hfig);
+%%
+assemble_tiles(tiles);
 
-assemble_tiles(tiles)
+%% create ten 2D animal spaces centered at the mean animal w/ random axes
+%[tiles, tiles_cdata] = make_animal_disc(origin, dir1, dir2, tile_res,
+%                                        ntiles, max_dist)
+
+ndiscs = 1;
+
+for i = 1:ndiscs
+    fn = ['animal_disc_' num2str(i)];
+    fprintf([fn '\n']);
+    
+    origin = mean_animal;
+    origin_n = param_vector_to_normalized_vector(origin);
+    
+    dir1_n = rand(1, length(shape_params)) - 0.5;
+    dir1_n = dir1_n / sqrt(sum(dir1_n.^2));
+    dir1 = origin - normalized_param_vector_to_vector(dir1_n + origin_n);
+    
+    dir2_n = rand(1, length(shape_params)) - 0.5;
+    dir2_n = dir2_n / sqrt(sum(dir2_n.^2));
+    dir2 = origin - normalized_param_vector_to_vector(dir2_n + origin_n);
+    
+    
+    %dir1 = normalized_param_vector_to_vector(rand(1, length(shape_params))-.5);
+    %dir2 = normalized_param_vector_to_vector(rand(1, length(shape_params))-.5);
+
+    [tiles, tiles_cdata] = make_animal_disc(mean_animal, dir1, dir2, ...
+        [200 200], 3, 0.5);
+    
+    imwrite(tiles_cdata/256, [fn '.png']);
+    save([fn '.mat'], 'dir1', 'dir2', 'tiles', 'tiles_cdata');
+end
