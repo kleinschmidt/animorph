@@ -12,8 +12,9 @@ set(gcf,'Position',[50 500 560 420]);
 cameratoolbar('Show');
 shape_params_struct_def;
 gui_params_struct_def;
-load dog.mat  %%% Start off with the dog loaded
-make_animal_using_global_params;
+load animals/dog.mat  %%% Start off with the dog loaded
+%make_animal_using_global_params;
+make_animal(shape_params);
 
 fig2 = figure(2);
 set(gcf,'Position',[650 500 560 420]);
@@ -131,7 +132,8 @@ end
 function load_params(src,eventdata)
 global shape_params
 [filename,pathname] = uigetfile('*.mat','Select the shape params file to load');
-load(filename);
-make_animal_using_global_params;
+load([pathname filename]);
+%make_animal_using_global_params;
+make_animal(shape_params);
 end
 

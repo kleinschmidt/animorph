@@ -18,7 +18,8 @@ end
 
 imres_adj = imres + 2*trim_pixels;
 
-set(fig_h, 'position', [100, 100, imres_adj]);
+pos = get(fig_h, 'position');
+set(fig_h, 'position', [pos(1), pos(2), imres_adj]);
 set(gca, 'position', [0, 0, 1, 1]);
 if (nargin > 2)
     axis(axis_limits);
@@ -27,6 +28,6 @@ axis off
 %im = frame2im(getframe(fig_h));
 im = opengl_cdata(fig_h);
 
-im = im((1:imres(1)) + trim_pixels(1), (1:imres(2)) + trim_pixels(2), :);
+im = im((1:imres(2)) + trim_pixels(2), (1:imres(1)) + trim_pixels(1), :);
 
 end

@@ -310,10 +310,10 @@ assemble_tiles(tiles);
 %[tiles, tiles_cdata] = make_animal_disc(origin, dir1, dir2, tile_res,
 %                                        ntiles, max_dist)
 
-ndiscs = 1;
+ndiscs = 10;
 
 for i = 1:ndiscs
-    fn = ['animal_disc_' num2str(i)];
+    fn = ['animals/animal_disc_' num2str(i)];
     fprintf([fn '\n']);
     
     origin = mean_animal;
@@ -332,7 +332,7 @@ for i = 1:ndiscs
     %dir2 = normalized_param_vector_to_vector(rand(1, length(shape_params))-.5);
 
     [tiles, tiles_cdata] = make_animal_disc(mean_animal, dir1, dir2, ...
-        [200 200], 3, 0.5);
+        [200 200], 6, 0.25);
     
     imwrite(tiles_cdata/256, [fn '.png']);
     save([fn '.mat'], 'dir1', 'dir2', 'tiles', 'tiles_cdata');
