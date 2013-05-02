@@ -337,3 +337,60 @@ for i = 1:ndiscs
     imwrite(tiles_cdata/256, [fn '.png']);
     save([fn '.mat'], 'dir1', 'dir2', 'tiles', 'tiles_cdata');
 end
+
+%% Find a reasonable subspace in the disk; generate training and test sets
+
+% use disk 8 for testing these
+load animals/animal_disc_8.mat
+
+% loads dir1 and dir2 as well as tiles
+origin = mean_animal;
+%%
+
+% disks were generated with -.25:.25
+subsp_origin = [0.125, 0];
+
+dist_out = 0.125;
+dist_in = dist_out / 2;
+
+n_in = 4;
+n_out = 8;
+
+theta_in = 0:(2*pi/n_in):(2*pi-0.001);
+theta_out = 0:(2*pi/n_out):(2*pi-0.001);
+
+xy_in = [cos(theta_in); sin(theta_in)] * dist_in + repmat(subsp_origin', [1, n_in]);
+xy_out = [cos(theta_out); sin(theta_out)] * dist_out + repmat(subsp_origin', [1, n_out]);
+
+
+%% generate stimulus images for both sets
+train_in = cell(n_in, 1);
+for (i = 1:n_in) 
+    cdata = xy_to_animal_image(xy_in(:,i), origin, dir1, dir2, [500 500]);
+    train_in{i} = cdata;
+end
+
+train_in_tiles = assemble_tiles(train_in);
+
+%% 
+train_out = cell(n_out, 1);
+for (i = 1:n_out) 
+    train_out{i} = xy_to_animal_image(xy_out(:,i), origin, dir1, dir2, [500 500]);
+end
+
+train_out_tiles = assemble_tiles(train_out);
+
+%%
+train_both = cell(4, 4);
+
+train_both(1:4) = train_in(:);
+train_both(9:16) = train_out(:);
+train_both_tiles = assemble_tiles(train_both);
+
+%% save to .mat file
+
+%save('animal-morph/animals/animal_disk_8_stimuli.mat', 'xy_in', 'xy_out', 'dir1', 'dir2', 'origin', 'subsp_origin', 'dist_out', 'dist_in');
+
+save('stimuli/animal_disk_8_stimuli.mat', ...
+    'xy_in', 'xy_out', 'dir1', 'dir2', 'origin', ...
+    'subsp_origin', 'dist_out', 'dist_in');
