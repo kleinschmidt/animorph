@@ -384,8 +384,9 @@ train_out_tiles = assemble_tiles(train_out);
 train_both = cell(4, 4);
 
 train_both(1:4) = train_in(:);
-train_both(9:16) = train_out(:);
+train_both([9, 13, 10, 14, 11, 15, 12, 16]) = train_out(:);
 train_both_tiles = assemble_tiles(train_both);
+
 
 %% save to .mat file
 
