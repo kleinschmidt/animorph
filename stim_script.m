@@ -395,3 +395,55 @@ train_both_tiles = assemble_tiles(train_both);
 save('stimuli/animal_disk_8_stimuli.mat', ...
     'xy_in', 'xy_out', 'dir1', 'dir2', 'origin', ...
     'subsp_origin', 'dist_out', 'dist_in');
+
+imwrite(train_both_tiles/256, 'stimuli/animal_disk_8_stimuli.png');
+
+
+%% generate generalization stimuli
+
+% generalization stimuli along an "X"
+gen1_dir = [1 1] * sqrt(2);
+gen2_dir = [-1, 1] * sqrt(2);
+
+% dist_in is half the outer distance. generalization stimuli at inner ring,
+% halfway to outer, and then beyond outer by half inner-outer distance
+gen_dist = [-2.5, -1.5, -1, 1, 1.5, 2.5] * dist_in;
+
+xy_proto = subsp_origin;
+xy_gen1 = gen1_dir' * gen_dist + repmat(subsp_origin', [1, length(gen_dist)]);
+xy_gen2 = gen2_dir' * gen_dist + repmat(subsp_origin', [1, length(gen_dist)]);
+
+
+% a third, orthogonal generalization direction (supply as dir2 to xy_to_...
+gendirs = load('animals/animal_disc_9.mat');
+dir3 = gendirs.dir1;
+
+xy_gen3 = [gen_dist * 0; gen_dist];
+
+
+%%
+
+gen_tiles = cell(length(gen_dist)+1, 3);
+
+for (i = 1:length(gen_dist)) 
+    if i > length(gen_dist)/2
+        j = i + 1;
+    else
+        j = i;
+    end
+    gen_tiles{j, 1} = xy_to_animal_image(xy_gen1(:,i), origin, dir1, dir2, [500 500]);
+    gen_tiles{j, 2} = xy_to_animal_image(xy_gen2(:,i), origin, dir1, dir2, [500 500]);
+    gen_tiles{j, 3} = xy_to_animal_image(xy_gen3(:,i), origin, dir1, dir3, [500 500]);
+end
+
+gen_tiles{length(gen_dist)/2 + 1, 2} = xy_to_animal_image(xy_proto, origin, dir1, dir2, [500 500]);
+
+gen_cdata = assemble_tiles(gen_tiles);
+
+%%
+save('stimuli/animal_disc_8_9_generalization.mat', ...
+    'origin', 'dir1', 'dir2', 'dir3', ...
+    'gen1_dir', 'gen2_dir', 'gen_dist', ...
+    'xy_gen1', 'xy_gen2', 'xy_gen3', 'xy_proto', 'subsp_origin');
+
+imwrite(gen_cdata/256, 'stimuli/animal_disc_8_9_generalization.png');
