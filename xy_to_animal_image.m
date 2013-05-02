@@ -12,9 +12,13 @@ if nargin < 6
     hfig = figure('visible', 'off', 'position', [100 100 resolution]);
 end
 
-
 param_vec = origin + xy(1)*dir1 + xy(2)*dir2;
-make_animal(param_vector_to_struct(param_vec), [.5 .5 .5], hfig);
+% the third "xy" coordinate is the rotation angle
+if length(xy) > 2
+    make_animal(param_vector_to_struct(param_vec), [.5 .5 .5], hfig, xy(3));
+else
+    make_animal(param_vector_to_struct(param_vec), [.5 .5 .5], hfig);
+end
 cdata = grab_animal_im(resolution, hfig);
 
 

@@ -1,5 +1,5 @@
 % /* The whole IGUANA */
-function make_animal(params, color, fig_h)
+function make_animal(params, color, fig_h, rotation)
 
 % compress parameters outside the range, starting at 10% of the range on
 % either side for the rolloff.
@@ -127,6 +127,12 @@ set([entire_head entire_body neck left_hind_leg left_foreleg ...
 %%%% Orient the animal such that the z-axis is up-down
 rotation_matrix = makehgtform('xrotate', pi/2);
 set(entire_animal,'Matrix',rotation_matrix);
+
+if nargin > 3
+    scene = hgtransform;
+    set([entire_animal], 'Parent', scene);
+    set(scene, 'Matrix', makehgtform('zrotate', rotation));
+end
 
 lighting gouraud;
 material dull;
