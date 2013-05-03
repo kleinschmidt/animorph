@@ -392,11 +392,11 @@ train_both_tiles = assemble_tiles(train_both);
 
 %save('animal-morph/animals/animal_disk_8_stimuli.mat', 'xy_in', 'xy_out', 'dir1', 'dir2', 'origin', 'subsp_origin', 'dist_out', 'dist_in');
 
-save('stimuli/animal_disk_8_stimuli.mat', ...
+save('stimuli/animal_disc_8_stimuli.mat', ...
     'xy_in', 'xy_out', 'dir1', 'dir2', 'origin', ...
     'subsp_origin', 'dist_out', 'dist_in');
 
-imwrite(train_both_tiles/256, 'stimuli/animal_disk_8_stimuli.png');
+imwrite(train_both_tiles/256, 'stimuli/animal_disc_8_stimuli.png');
 
 
 %% generate generalization stimuli
