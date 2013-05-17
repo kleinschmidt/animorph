@@ -349,6 +349,49 @@ make_stimuli('animals/animal_disc_8.mat', 'stimuli/animal_disc_8_stimuli_2to1', 
 make_stimuli('animals/animal_disc_8.mat', 'stimuli/animal_disc_8_stimuli_3to1', 3*inner_dist, inner_dist, 8, 4, [0.125, 0]);
 make_stimuli('animals/animal_disc_8.mat', 'stimuli/animal_disc_8_stimuli_4to1', 4*inner_dist, inner_dist, 8, 4, [0.125, 0]);
 
+%% Control foot size
+
+disc = open('animals/animal_disc_8.mat');
+
+dir1s = param_vector_to_struct(disc.dir1);
+dir2s = param_vector_to_struct(disc.dir2);
+
+%%
+getp(dir1s, 'foot length')
+getp(dir2s, 'foot length')
+
+getp(dir1s, 'hand length')
+getp(dir2s, 'hand length')
+
+dir1s = setp(dir1s, 'foot length', 0);
+dir1s = setp(dir1s, 'hand length', 0);
+
+dir2s = setp(dir2s, 'foot length', 0);
+dir2s = setp(dir2s, 'hand length', 0);
+
+dir1 = param_struct_to_vector(dir1s);
+dir2 = param_struct_to_vector(dir2s);
+
+load('animals/average.mat');
+origin = param_struct_to_vector(orig_s);
+
+%%
+[tiles tiles_cdata] = make_animal_disc(origin, dir1, dir2, ...
+    [200 200], 8, 0.4);
+%%
+fn = 'animal-morph/animals/animal_disc_8_0foot';
+imwrite(tiles_cdata/256, [fn '.png']);
+save([fn '.mat'], 'dir1', 'dir2', 'tiles', 'tiles_cdata');
+
+%% generate updated stimuli after fixing feet
+
+make_stimuli('animals/animal_disc_8_0foot.mat', 'stimuli/animal_disc_8_0foot_stimuli_2to1', 2*inner_dist, inner_dist, 8, 4, [0.125, 0]);
+
+% Generate easier stimuli (outer:inner distance ratio of 3:1)
+make_stimuli('animals/animal_disc_8_0foot.mat', 'stimuli/animal_disc_8_0foot_stimuli_3to1', 3*inner_dist, inner_dist, 8, 4, [0.125, 0]);
+make_stimuli('animals/animal_disc_8_0foot.mat', 'stimuli/animal_disc_8_0foot_stimuli_4to1', 4*inner_dist, inner_dist, 8, 4, [0.125, 0]);
+
+
 %% generate generalization stimuli
 
 % generalization stimuli along an "X"
