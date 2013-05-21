@@ -13,6 +13,8 @@ if (nargin < 2)
     end
 end
 
-params = struct('value', num2cell(params_vec), 'name', names_vec, 'range', range_vec);
+params = struct('value', num2cell(reshape(params_vec, size(names_vec))),...
+    'name', names_vec, ...
+    'range', range_vec);
 
 end

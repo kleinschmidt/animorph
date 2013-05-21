@@ -12,23 +12,26 @@ function cdata = xy_to_animal_image(xy, origin, dirs, resolution, hfig)
 [nfeat, ndir] = size(dirs);
 if (length(xy) < ndir || length(xy) > ndir+1) 
     error(sprintf('Mismatching length of xy vector (%d) and number of directions (%d)', ...
-        length(xy), ndir);
+        length(xy), ndir));
 end
 
+
 % default parameter values
-if nargin < 5
-    resolution = [200 200]
+if nargin < 4
+    resolution = [200 200];
 end
 
 if length(resolution) == 1
     resolution = [1 1] * resolution;
 end
 
-if nargin < 6
+if nargin < 5
     hfig = figure('visible', 'off', 'position', [100 100 resolution]);
 end
 
-param_vec = origin + dirs * xy(1:ndir)';
+% make sure origin has the right dimensions
+
+param_vec = reshape(origin, [nfeat, 1]) + dirs * reshape(xy(1:ndir), [ndir 1]);
 % the ndir+1th "xy" coordinate is the rotation angle
 if length(xy) > ndir
     make_animal(param_vector_to_struct(param_vec), [.5 .5 .5], hfig, xy(ndir+1));

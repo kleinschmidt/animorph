@@ -424,12 +424,12 @@ for (i = 1:length(gen_dist))
     else
         j = i;
     end
-    gen_tiles{j, 1} = xy_to_animal_image(xy_gen1(:,i), origin, dir1, dir2, [500 500]);
-    gen_tiles{j, 2} = xy_to_animal_image(xy_gen2(:,i), origin, dir1, dir2, [500 500]);
-    gen_tiles{j, 3} = xy_to_animal_image(xy_gen3(:,i), origin, dir1, dir3, [500 500]);
+    gen_tiles{j, 1} = xy_to_animal_image_old(xy_gen1(:,i), origin, dir1, dir2, [500 500]);
+    gen_tiles{j, 2} = xy_to_animal_image_old(xy_gen2(:,i), origin, dir1, dir2, [500 500]);
+    gen_tiles{j, 3} = xy_to_animal_image_old(xy_gen3(:,i), origin, dir1, dir3, [500 500]);
 end
 
-gen_tiles{length(gen_dist)/2 + 1, 2} = xy_to_animal_image(xy_proto, origin, dir1, dir2, [500 500]);
+gen_tiles{length(gen_dist)/2 + 1, 2} = xy_to_animal_image_old(xy_proto, origin, dir1, dir2, [500 500]);
 
 gen_cdata = assemble_tiles(gen_tiles);
 
