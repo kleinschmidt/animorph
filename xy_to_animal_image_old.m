@@ -1,7 +1,7 @@
 function cdata = xy_to_animal_image_old(xy, origin, dir1, dir2, resolution, hfig)
 
 if nargin < 5
-    resolution = [200 200]
+    resolution = [200 200];
 end
 
 if length(resolution) == 1

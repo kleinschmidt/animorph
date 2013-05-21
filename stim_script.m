@@ -440,3 +440,44 @@ save('stimuli/animal_disc_8_9_generalization.mat', ...
     'xy_gen1', 'xy_gen2', 'xy_gen3', 'xy_proto', 'subsp_origin');
 
 imwrite(gen_cdata/256, 'stimuli/animal_disc_8_9_generalization.png');
+
+%% Correct feet for disc 9
+
+disc = open('animals/animal_disc_9.mat');
+
+dir1s = param_vector_to_struct(disc.dir1);
+dir2s = param_vector_to_struct(disc.dir2);
+
+getp(dir1s, 'foot length')
+getp(dir2s, 'foot length')
+
+getp(dir1s, 'hand length')
+getp(dir2s, 'hand length')
+
+dir1s = setp(dir1s, 'foot length', 0);
+dir1s = setp(dir1s, 'hand length', 0);
+
+dir2s = setp(dir2s, 'foot length', 0);
+dir2s = setp(dir2s, 'hand length', 0);
+
+dir1 = param_struct_to_vector(dir1s);
+dir2 = param_struct_to_vector(dir2s);
+
+load('animals/average.mat');
+origin = param_struct_to_vector(orig_s);
+
+[tiles tiles_cdata] = make_animal_disc(origin, dir1, dir2, ...
+    [200 200], 8, 0.4);
+
+fn = 'animal-morph/animals/animal_disc_9_0foot';
+imwrite(tiles_cdata/256, [fn '.png']);
+save([fn '.mat'], 'dir1', 'dir2', 'tiles', 'tiles_cdata');
+
+
+%% Make Generalization stimuli using function:
+
+[xy_gen, dirs_gen, origin, dists, thetas] = ...
+    make_generalization_stimuli('stimuli/animal_disc_8_0foot_stimuli_4to1.mat', ...
+    'animal-morph/animals/animal_disc_9_0foot.mat', ...
+    'stimuli/animal_disc_8_9_gen_0foot.mat', ...
+    [1 2 3 4 5]);
