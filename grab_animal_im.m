@@ -21,7 +21,7 @@ imres_adj = imres + 2*trim_pixels;
 pos = get(fig_h, 'position');
 set(fig_h, 'position', [pos(1), pos(2), imres_adj]);
 set(gca, 'position', [0, 0, 1, 1]);
-if (nargin > 2)
+if (nargin > 2 && axis_limits ~= 0)
     axis(axis_limits);
 end
 axis off

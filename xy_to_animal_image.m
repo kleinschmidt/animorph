@@ -1,4 +1,4 @@
-function cdata = xy_to_animal_image(xy, origin, dirs, resolution, hfig)
+function cdata = xy_to_animal_image(xy, origin, dirs, resolution, hfig, trim_pixels)
 % cdata = xy_to_animal_image(xy, origin, dirs, resolution, hfig)
 %   Generate an image from xy coordinates, and an origin and directions of
 % variation in parameter space.  XY coordinates can be of arbitrary
@@ -29,6 +29,10 @@ if nargin < 5
     hfig = figure('visible', 'off', 'position', [100 100 resolution]);
 end
 
+if nargin < 6
+    trim_pixels = 20;
+end
+
 % make sure origin has the right dimensions
 
 param_vec = reshape(origin, [nfeat, 1]) + dirs * reshape(xy(1:ndir), [ndir 1]);
@@ -38,7 +42,8 @@ if length(xy) > ndir
 else
     make_animal(param_vector_to_struct(param_vec), [.5 .5 .5], hfig);
 end
-cdata = grab_animal_im(resolution, hfig);
+% grab image, passing axis_limits = 0 as "missing" value.
+cdata = grab_animal_im(resolution, hfig, 0, trim_pixels);
 
 
 if nargin < 6
