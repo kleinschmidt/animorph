@@ -356,7 +356,6 @@ disc = open('animals/animal_disc_8.mat');
 dir1s = param_vector_to_struct(disc.dir1);
 dir2s = param_vector_to_struct(disc.dir2);
 
-%%
 getp(dir1s, 'foot length')
 getp(dir2s, 'foot length')
 
@@ -375,7 +374,6 @@ dir2 = param_struct_to_vector(dir2s);
 load('animals/average.mat');
 origin = param_struct_to_vector(orig_s);
 
-%%
 [tiles tiles_cdata] = make_animal_disc(origin, dir1, dir2, ...
     [200 200], 8, 0.4);
 %%
@@ -390,6 +388,25 @@ make_stimuli('animals/animal_disc_8_0foot.mat', 'stimuli/animal_disc_8_0foot_sti
 % Generate easier stimuli (outer:inner distance ratio of 3:1)
 make_stimuli('animals/animal_disc_8_0foot.mat', 'stimuli/animal_disc_8_0foot_stimuli_3to1', 3*inner_dist, inner_dist, 8, 4, [0.125, 0]);
 make_stimuli('animals/animal_disc_8_0foot.mat', 'stimuli/animal_disc_8_0foot_stimuli_4to1', 4*inner_dist, inner_dist, 8, 4, [0.125, 0]);
+
+
+%% Control thigh radius (butt size)
+
+inner_dist = 0.0625;
+
+make_stimuli('animals/animal_disc_8.mat', 'stimuli/animal_disc_8_0foot_0thigh_stimuli_2to1', ...
+    2*inner_dist, inner_dist, 8, 4, [0.125, 0], [500 500], ...
+    {'foot length', 'hand length', 'thigh radius'});
+
+
+make_stimuli('animals/animal_disc_8.mat', 'stimuli/animal_disc_8_0foot_0thigh_stimuli_3to1', ...
+    3*inner_dist, inner_dist, 8, 4, [0.125, 0], [500 500], ...
+    {'foot length', 'hand length', 'thigh radius'});
+
+
+make_stimuli('animals/animal_disc_8.mat', 'stimuli/animal_disc_8_0foot_0thigh_stimuli_4to1', ...
+    4*inner_dist, inner_dist, 8, 4, [0.125, 0], [500 500], ...
+    {'foot length', 'hand length', 'thigh radius'});
 
 
 %% generate generalization stimuli
@@ -480,4 +497,12 @@ save([fn '.mat'], 'dir1', 'dir2', 'tiles', 'tiles_cdata');
     make_generalization_stimuli('stimuli/animal_disc_8_0foot_stimuli_4to1.mat', ...
     'animal-morph/animals/animal_disc_9_0foot.mat', ...
     'stimuli/animal_disc_8_9_gen_0foot.mat', ...
+    [1 2 3 4 5]);
+
+%% Generalization stimuli with both foot size and thigh radius zeroed out
+
+[xy_gen, dirs_gen, origin, dists, thetas] = ...
+    make_generalization_stimuli('stimuli/animal_disc_8_0foot_0thigh_stimuli_4to1.mat', ...
+    'animal-morph/animals/animal_disc_9.mat', ...
+    'stimuli/animal_disc_8_9_gen_0foot_0thigh.mat', ...
     [1 2 3 4 5]);
