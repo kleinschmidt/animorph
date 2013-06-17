@@ -5,7 +5,8 @@ if (nargin < 1)
 end
 
 if nargin < 4
-    trim_pixels = 20;
+    % trim_pixels = 20;
+    trim_pixels = 0;
 end
 if length(trim_pixels) == 1
     trim_pixels = [1 1] * trim_pixels;

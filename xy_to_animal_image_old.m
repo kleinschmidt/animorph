@@ -15,7 +15,7 @@ end
 param_vec = origin + xy(1)*dir1 + xy(2)*dir2;
 % the third "xy" coordinate is the rotation angle
 if length(xy) > 2
-    make_animal(param_vector_to_struct(param_vec), [.5 .5 .5], hfig, xy(3));
+    make_animal(param_vector_to_struct(param_vec), [.5 .5 .5], hfig, xy(3:end));
 else
     make_animal(param_vector_to_struct(param_vec), [.5 .5 .5], hfig);
 end

@@ -1,5 +1,5 @@
 % /* The whole IGUANA */
-function make_animal(params, color, fig_h, rotation)
+function make_animal(params, color, fig_h, rotation, zoom_factor)
 
 % compress parameters outside the range, starting at 10% of the range on
 % either side for the rolloff.
@@ -12,6 +12,11 @@ end
 
 global shape_params
 
+if nargin < 5
+    % default zoom factor, trim off some dead space.
+    zoom_factor = 1.8;
+end
+
 if (nargin > 1) 
     old_surface_colour = surface_colour;
     surface_colour = color;
@@ -23,7 +28,6 @@ if (nargin > 0)
     end
     shape_params = params;
 end
-
 
 
 shape_params(find(strcmp({shape_params.name},'alpha'))).value = 1; % The variable called alpha
@@ -124,15 +128,29 @@ set(tail_object,'Matrix',translation_matrix*rotation_matrix);
 entire_animal = hgtransform;
 set([entire_head entire_body neck left_hind_leg left_foreleg ...
      right_hind_leg right_foreleg tail_object],'Parent',entire_animal);
+%%%% Translate everything so that things are centered on the abdomen
+half_chest_translation_mat = makehgtform('translate', ...
+    -(shoulders_xyz_location+...
+    0.5*chest_length*animal_size*[1 0 0]));
 %%%% Orient the animal such that the z-axis is up-down
 rotation_matrix = makehgtform('xrotate', pi/2);
-set(entire_animal,'Matrix',rotation_matrix);
+set(entire_animal,'Matrix',rotation_matrix * half_chest_translation_mat);
+
+% store camera position before rotating the whole animal.
+camtarget([0 0 0]);
+camzoom(zoom_factor);  % 2x zoom is too much, clips tail sometimes...
+campos_pre_rotate = campos();
 
 if nargin > 3
     scene = hgtransform;
     set([entire_animal], 'Parent', scene);
-    set(scene, 'Matrix', makehgtform('zrotate', rotation));
+    if length(rotation) == 1
+        rotation(2) = 0;
+    end
+    set(scene, 'Matrix', makehgtform('zrotate', rotation(1), 'yrotate', rotation(2)));
 end
+
+campos(campos_pre_rotate);
 
 lighting gouraud;
 material dull;
