@@ -10,7 +10,13 @@ namespace](https://www.mathworks.com/help/matlab/matlab_oop/scoping-classes-with
 where you want to use the package, or use qualified names:
 
 ```matlab
-cd <local installed directory>
+cd ~/code                       % for example
+!git clone https://github.com/kleinschmidt/animorph.git
+cd animorph
+
+% optionally, add to path:
+addpath(pwd);
+
 load('examples/dog.mat');
 
 % with namespace reference:
