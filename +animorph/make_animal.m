@@ -23,7 +23,7 @@ import animorph.*;
 params = validate_params(params, 0.1);
 
 global surface_colour
-if (~ exist('surface_colour')) 
+if (~ exist('surface_colour') | isempty(surface_colour))
     surface_colour = [1 0.65 0.1];
 end
 
@@ -68,13 +68,13 @@ end
 
 clf;
 axis('equal');
+
+% turn off axes visibility
+set(gca, 'visible', 'off');
+
 %%%%%%%%%%%%%% Set up the lighting and view angle for the whole scene
 lightangle(-145,40);
 view(-145,20);
-xlabel('x-axis');
-ylabel('y-axis');
-zlabel('z-axis');
-grid on;
 
 %%% The head is centered at [0,0,0].
 %%% Everything is is positioned with respect to the head.
