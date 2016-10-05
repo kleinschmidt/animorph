@@ -39,7 +39,7 @@ if (nargin > 2 && axis_limits ~= 0)
     axis(axis_limits);
 end
 axis off
-%im = frame2im(getframe(fig_h));
+
 im = opengl_cdata(fig_h);
 
 im = im((1:imres(2)) + trim_pixels(2), (1:imres(1)) + trim_pixels(1), :);
