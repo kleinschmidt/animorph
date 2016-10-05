@@ -36,6 +36,6 @@ lower-level drawing functions directly.
 
 # Contributors
 
-Shimon Edelman wrote the original OpenGL code, which Rajeev Raizada initially
-adapted for Matlab. Dave Kleinschmidt further adapted and wrote the high-level
-interfaces.
+* [Shimon Edelman](http://kybele.psych.cornell.edu/~edelman/) wrote the original OpenGL code
+* [Rajeev Raizada](http://raizadalab.org/) initially adapted for Matlab. 
+* [Dave Kleinschmidt](http://github.com/kleinschmidt) further adapted and wrote the high-level interfaces.
