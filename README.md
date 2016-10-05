@@ -10,16 +10,22 @@ namespace](https://www.mathworks.com/help/matlab/matlab_oop/scoping-classes-with
 where you want to use the package, or use qualify names:
 
 ```matlab
+cd <local installed directory>
+load('examples/dog.mat');
+
+% with namespace reference:
+animorph.make_animal(shape_params);
+
+% with import:
 import animorph.*;
-% or
-animorph.make_animal(...);
+make_animal(shape_params)
 ```
 
 ## Interface
 
 Animals are defined by a parameter struct, which can be passed to most functions
 or set as a global variable (`shape_params`). This is defined in
-`shape_params_struct_def.m`, or see the files in `animals/` for examples.
+`shape_params_struct_def.m`, or see the files in `examples/` for examples.
 
 The main functions are `make_animal`, which draws a param struct to a Matlab
 figure, and `grab_animal_im` which capturse the image as a CDATA array of RGB
