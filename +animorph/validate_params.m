@@ -1,4 +1,5 @@
 function params = validate_params(params_in, end_padding_factor)
+import animorph.*;
 
 % what proportion of the range to restrict to?
 if nargin < 2

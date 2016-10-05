@@ -1,4 +1,6 @@
 function [continuum, tiles, param_mat] = make_animal_continuum_tiles(animal_1, animal_2, tile_res, ntiles, axis_limits, lambda_range)
+    
+import animorph.*;
 
 if nargin < 2
     error('Require two animal parameter vectors');

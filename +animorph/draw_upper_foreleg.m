@@ -1,4 +1,5 @@
 function upper_foreleg = draw_upper_foreleg
+import animorph.*;
 
 global shape_params
 

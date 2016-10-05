@@ -1,6 +1,7 @@
 function [tiles, tiles_cdata] = make_animal_disc(origin, dir1, dir2, tile_res, ntiles, max_dist)
 %[tiles, tiles_cdata] = make_animal_disc(origin, dir1, dir2, [tile_res, ...
 %                                        ntiles, max_dist])
+import animorph.*;
 
 if nargin < 5
     ntiles = 5;

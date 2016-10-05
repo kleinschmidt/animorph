@@ -1,4 +1,5 @@
 function neck_object = draw_neck
+import animorph.*;
 
 global shape_params
 

@@ -10,7 +10,9 @@ function im = grab_animal_im(imres, fig_h, axis_limits, trim_pixels)
 %   trim_pixels: Optional, if specified
 % Output:
 %   CDATA of captured image, a 3D array of pixel RGB values.
-    
+
+import animorph.*;
+
 if (nargin < 1) 
     imres = [500 500];
 end

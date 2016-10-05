@@ -1,5 +1,6 @@
 function params_vec = normalized_param_vector_to_vector(params_vec, names_vec, range_vec)
 % Convert param values in [0,1] to vector with actual ranges.
+import animorph.*;
 
 global shape_params
 

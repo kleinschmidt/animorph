@@ -1,4 +1,5 @@
 function params = param_vector_to_struct(params_vec, names_vec, range_vec)
+import animorph.*;
 
 global shape_params
 

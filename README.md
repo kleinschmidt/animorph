@@ -3,6 +3,18 @@
 This provides matlab functions to generate 3D renderings of "animals" based on a
 parametric model of body part size, location, and orientation.
 
+## Installation
+
+Clone this repository and add it to your Matlab path. Then import the [package
+namespace](https://www.mathworks.com/help/matlab/matlab_oop/scoping-classes-with-packages.html) 
+where you want to use the package, or use qualify names:
+
+```matlab
+import animorph.*;
+% or
+animorph.make_animal(...);
+```
+
 ## Interface
 
 Animals are defined by a parameter struct, which can be passed to most functions

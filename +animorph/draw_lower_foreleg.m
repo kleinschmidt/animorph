@@ -1,5 +1,6 @@
 %%%%%%%% LOWER_FORELEG
 function lower_foreleg = draw_lower_foreleg
+import animorph.*;
 
 global shape_params
 

@@ -1,4 +1,5 @@
 function lower_hind_leg = draw_lower_hind_leg
+import animorph.*;
 
 global shape_params
 

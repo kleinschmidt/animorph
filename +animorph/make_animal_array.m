@@ -1,6 +1,8 @@
 % make 2D array of animals by specifying origin and two directions.
-function [animal_array, tiles, params] = make_animal_array_polar(origin, animal_1, animal_2, ...
+function [animal_array, tiles, params] = make_animal_array(origin, animal_1, animal_2, ...
     tile_res, ntiles, axis_limits, dist_lambda_range, angle_lambda_range)
+    
+import animorph.*;
 
 
 dir1 = animal_1 - origin;

@@ -1,5 +1,6 @@
 % /* FOOT */
 function foot_object = draw_foot
+import animorph.*;
 
 global surface_colour
 global shape_params

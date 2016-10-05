@@ -1,5 +1,6 @@
 %%%%%%%%%%%%%%%%/* Fore-leg */
 function fore_leg = draw_foreleg
+import animorph.*;
 
 global shape_params
 

@@ -16,6 +16,8 @@ function make_animal(params, color, fig_h, rotation, zoom_factor)
 % Side effect: 
 %   Image is drawn to fig_h. Use grab_animal_im to capture image in CDATA array.
 
+import animorph.*;
+
 % compress parameters outside the range, starting at 10% of the range on
 % either side for the rolloff.
 params = validate_params(params, 0.1);

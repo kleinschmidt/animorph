@@ -16,6 +16,7 @@ function cdata = xy_to_animal_image(xy, origin, dirs, resolution, hfig, trim_pix
 % Output:
 %   cdata: Captured image data, in a width x height x RGB array with values
 %     from 0 to 256
+import animorph.*;
 
 % check that dimensions line up okay.
 [nfeat, ndir] = size(dirs);

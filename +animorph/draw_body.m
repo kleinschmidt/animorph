@@ -2,6 +2,7 @@
 %   BODY is two ellipsoids: chest and abdomen.
 %   */
 function entire_body = draw_body
+import animorph.*;
 
 global shape_params
 

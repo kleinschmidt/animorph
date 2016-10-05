@@ -1,7 +1,8 @@
 function morph_between_two_animals_gui
 % GUI for morphing between two animals, from parameter structs loaded from
 % .mat files
-    
+import animorph.*;
+
 global surface_colour
 global shape_params params1 animal1_name params2 animal2_name lambda
 global gui_params
@@ -69,6 +70,7 @@ end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function get_value(src,eventdata)
+import animorph.*;
 global shape_params params1 params2 lambda
 lambda = get(src,'Value');
 tag = get(src,'Tag');
@@ -83,6 +85,7 @@ end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function save_params(src,eventdata)
+import animorph.*;
 global shape_params
 file_name_cell = inputdlg('Filename of shape params file to save');
 file_name_string = file_name_cell{1};
@@ -91,6 +94,7 @@ end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function load_animal1(src,eventdata)
+import animorph.*;
 global shape_params params1 params2 animal1_name lambda
 [animal1_name,pathname] = uigetfile('*.mat','Select the shape params file to load');
 load(animal1_name);
@@ -105,6 +109,7 @@ end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function load_animal2(src,eventdata)
+import animorph.*;
 global shape_params params1 params2 animal2_name lambda
 [animal2_name,pathname] = uigetfile('*.mat','Select the shape params file to load');
 load(animal2_name);
@@ -119,6 +124,7 @@ end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function update_text_labels
+import animorph.*;
 global animal1_name animal2_name
 
 textlabel_handle1 = uicontrol('Style','text', ...

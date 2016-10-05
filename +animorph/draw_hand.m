@@ -1,5 +1,6 @@
 % /* HAND, i.e. front foot */
 function hand_object = draw_hand
+import animorph.*;
 
 global surface_colour
 global shape_params

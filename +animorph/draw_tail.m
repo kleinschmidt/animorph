@@ -1,5 +1,6 @@
 % /* TAIL */
 function tail_object = draw_tail
+import animorph.*;
 
 global shape_params
 

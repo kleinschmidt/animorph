@@ -2,6 +2,7 @@
 % /* SPHERE */
 % void
 function sphere_object = draw_sph_pure_matlab(radius)
+import animorph.*;
 
 global surface_colour;
 

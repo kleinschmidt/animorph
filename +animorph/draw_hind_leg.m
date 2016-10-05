@@ -1,5 +1,6 @@
 %%%%%%%%%%%%%%%%/* Hind leg */
 function hind_leg = draw_hind_leg
+import animorph.*;
 
 global surface_colour
 global shape_params

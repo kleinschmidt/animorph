@@ -1,4 +1,5 @@
 global gui_params
+import animorph.*;
 
 slider_length = 0.24;
 slider_height = 0.01;

@@ -1,5 +1,6 @@
 % THIGH
 function thigh = draw_thigh
+import animorph.*;
 
 global shape_params
 

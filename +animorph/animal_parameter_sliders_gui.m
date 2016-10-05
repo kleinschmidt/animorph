@@ -1,6 +1,8 @@
 function animal_parameter_sliders_gui
 % Launch GUI to generate animals based on parameter values set via sliders
     
+import animorph.*;
+    
 global surface_colour
 global shape_params
 global gui_params
@@ -72,6 +74,7 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function update_slider_value_text(slider_num)
 global shape_params gui_params
+import animorph.*;
 
 num_sliders = length(shape_params)-1;
 valuetext_handles = zeros(num_sliders,1);
@@ -103,6 +106,8 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function get_value(src,eventdata)
 global shape_params gui_params
+import animorph.*;
+
 val = get(src,'Value');
 tag = get(src,'Tag');
 
@@ -122,6 +127,8 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function save_params(src,eventdata)
 global shape_params
+import animorph.*;
+
 file_name_cell = inputdlg('Filename of shape params file to save');
 file_name_string = file_name_cell{1};
 save(file_name_string,'shape_params');
@@ -130,6 +137,8 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function load_params(src,eventdata)
 global shape_params
+import animorph.*;
+
 [filename,pathname] = uigetfile('*.mat','Select the shape params file to load');
 load([pathname filename]);
 make_animal(shape_params);

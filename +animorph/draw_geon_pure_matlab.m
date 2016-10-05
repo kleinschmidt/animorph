@@ -21,6 +21,7 @@ function geon_object = ...
    geon_length)
 
 global surface_colour;
+import animorph.*;
 
 hold on;
 

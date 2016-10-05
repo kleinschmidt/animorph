@@ -1,5 +1,6 @@
 %%%%%%%%%%%%%%/* HEAD: */
 function entire_head = draw_head
+import animorph.*;
 
 global shape_params
 
@@ -59,6 +60,7 @@ set(right_ear,'Matrix',rotation_matrix_2*rotation_matrix_1*translation_matrix*sc
 % translation, rotation, and scaling, so snout appears as a sphere with
 % radius animal_size * snout_length)
 function new_location = fix_eyes_snout(eye_location)
+    import animorph.*;
     xyz_snout_frame = Tsnout^-1 * [eye_location, 1]';
     xyz_snout_dist = sqrt(sum((xyz_snout_frame(1:3)).^2));
     if xyz_snout_dist < animal_size * snout_length
