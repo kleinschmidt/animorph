@@ -33,3 +33,9 @@ level functions.
 These all (except the sphere/geon functions) use the __global__ `shape_params`
 variable, so be sure this is set the way you want if you're going to use
 lower-level drawing functions directly.
+
+# Contributors
+
+Shimon Edelman wrote the original OpenGL code, which Rajeev Raizada initially
+adapted for Matlab. Dave Kleinschmidt further adapted and wrote the high-level
+interfaces.
