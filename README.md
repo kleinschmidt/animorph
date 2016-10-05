@@ -7,7 +7,7 @@ parametric model of body part size, location, and orientation.
 
 Clone this repository and add it to your Matlab path. Then import the [package
 namespace](https://www.mathworks.com/help/matlab/matlab_oop/scoping-classes-with-packages.html) 
-where you want to use the package, or use qualify names:
+where you want to use the package, or use qualified names:
 
 ```matlab
 cd <local installed directory>
