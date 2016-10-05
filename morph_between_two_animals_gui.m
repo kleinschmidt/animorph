@@ -26,7 +26,7 @@ for param_num = 1:length(shape_params);
    shape_params(param_num).value = ...
       (1-lambda)*params1(param_num).value + lambda*params2(param_num).value;
 end;
-make_animal_using_global_params;
+make_animal(shape_params);
 
 fig2 = figure(2);
 set(gcf,'Position',[650 500 560 420]);
@@ -75,7 +75,7 @@ for param_num = 1:length(shape_params);
    shape_params(param_num).value = ...
       (1-lambda)*params1(param_num).value + lambda*params2(param_num).value;
 end;
-make_animal_using_global_params;
+make_animal(shape_params);
 
 end
 
@@ -98,7 +98,7 @@ for param_num = 1:length(shape_params);
    shape_params(param_num).value = ...
       (1-lambda)*params1(param_num).value + lambda*params2(param_num).value;
 end;
-make_animal_using_global_params;
+make_animal(shape_params);
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -112,7 +112,7 @@ for param_num = 1:length(shape_params);
    shape_params(param_num).value = ...
       (1-lambda)*params1(param_num).value + lambda*params2(param_num).value;
 end;
-make_animal_using_global_params;
+make_animal(shape_params);
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -13,7 +13,6 @@ cameratoolbar('Show');
 shape_params_struct_def;
 gui_params_struct_def;
 load animals/dog.mat  %%% Start off with the dog loaded
-%make_animal_using_global_params;
 make_animal(shape_params);
 
 fig2 = figure(2);
@@ -115,7 +114,6 @@ for slider_num = 1:num_sliders,
    end;
 end;
 
-%make_animal_using_global_params;
 make_animal(shape_params);
 
 end
@@ -133,7 +131,6 @@ function load_params(src,eventdata)
 global shape_params
 [filename,pathname] = uigetfile('*.mat','Select the shape params file to load');
 load([pathname filename]);
-%make_animal_using_global_params;
 make_animal(shape_params);
 end
 
