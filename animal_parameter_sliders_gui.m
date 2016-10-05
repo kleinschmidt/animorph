@@ -1,5 +1,6 @@
 function animal_parameter_sliders_gui
-
+% Launch GUI to generate animals based on parameter values set via sliders
+    
 global surface_colour
 global shape_params
 global gui_params

@@ -1,12 +1,21 @@
 function cdata = xy_to_animal_image(xy, origin, dirs, resolution, hfig, trim_pixels)
+% Generate image for animal based on cartesian coordinates in animal space
+% 
 % cdata = xy_to_animal_image(xy, origin, dirs, resolution, hfig)
-%   Generate an image from xy coordinates, and an origin and directions of
-% variation in parameter space.  XY coordinates can be of arbitrary
-% dimension so long as enough directions are specified.  Returns a "cdata"
-% array, a width x height x 3 RGB array with values from 0 to 256.
 %
-% dirs is a nfeat X ndir matrix, and xy is a vector of length ndir
-% or ndir+1 (if ndir+1, last entry specifies the rotation)
+% Input: 
+%   xy: Coordinates in "animal space", corresponding to basis vectors in dirs.
+%   origin: Origin of coordinate system in parameter space (see
+%     param_vector_to_struct.m).
+%   dirs: Each column corresponds to a basis vector in parameter space, as an
+%     offset from origin. 
+%   resolution: Of captured image. Default [500 500]
+%   hfig: Handle of figure to use for drawing. Optional, defaults to a new,
+%     hidden figure.
+%   trim_pixels: Number of pixels to trim off the captured images. Default: 20.
+% Output:
+%   cdata: Captured image data, in a width x height x RGB array with values
+%     from 0 to 256
 
 % check that dimensions line up okay.
 [nfeat, ndir] = size(dirs);

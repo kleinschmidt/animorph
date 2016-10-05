@@ -1,5 +1,6 @@
 function params = normalized_param_vector_to_struct(params_vec, names_vec, range_vec)
-
+% Convert param values in [0,1] to struct with actual ranges.
+    
 global shape_params
 
 if (nargin < 2)

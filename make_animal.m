@@ -1,5 +1,20 @@
-% /* The whole IGUANA */
 function make_animal(params, color, fig_h, rotation, zoom_factor)
+% Draw an animal based on parameters and (optionally) view factors
+% 
+% function make_animal(params, color, fig_h, rotation, zoom_factor)
+% 
+% Input:
+%   params: A parameter struct (see shape_params_struct_def.m).
+%   color: RGB vector in [0,1] (optional, defaults to global value, then
+%     [1 0.65 0.1]).
+%   fig_h: Handle of figure to draw to (optional, defaults to 1)
+%   rotation: Rotation about z and y axes. (Optional, defaults to 0)
+%   zoom_factor: Optional, default is 1.8 (trims off dead space around animal
+%     in default view).
+% Output:
+%   none.
+% Side effect: 
+%   Image is drawn to fig_h. Use grab_animal_im to capture image in CDATA array.
 
 % compress parameters outside the range, starting at 10% of the range on
 % either side for the rolloff.

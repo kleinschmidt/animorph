@@ -1,5 +1,7 @@
 function morph_between_two_animals_gui
-
+% GUI for morphing between two animals, from parameter structs loaded from
+% .mat files
+    
 global surface_colour
 global shape_params params1 animal1_name params2 animal2_name lambda
 global gui_params
