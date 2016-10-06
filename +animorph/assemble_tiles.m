@@ -1,6 +1,7 @@
 function cdata = assemble_tiles(tiles, hfig, scale_factor)
+% Assemble a cell array of individual images into a single image, and plot
+% 
 % cdata = assemble_tiles(tiles, [hfig, scale_factor])
-% assemble a cell array of individual images into a single image, and plot
 import animorph.*;
 
 if nargin < 2

@@ -1,3 +1,16 @@
+% Draw a generalized cylinder
+% 
+% Aligned with x axis, 
+% 
+% Input:
+%   taper_function: 1 for const, 2 for waist, 3 for bulge
+%   radius_1: radius at start (x=0)
+%   radius_2: radius at end (x=geon_length)
+%   bulge_or_waist_factor: proportion of bulge or waist at midpoint width
+%   geon_length: length (maximum x coordinate)
+% Output:
+%   geon_object: handle of drawn geon object
+
 
 % %/*
 %   GENERALIZED CYLINDER
@@ -14,7 +27,7 @@
 %%% with all the other functions that use it (leg-drawing, etc.)
 
 function geon_object = ...
-   draw_geon_pure_matlab(taper_function, ... %%/* 1 for const, 2 for waist, 3 for bulge */
+   draw_geon_pure_matlab(taper_function, ...
    radius_1, ...
    radius_2, ...
    bulge_or_waist_factor, ...

@@ -1,4 +1,3 @@
-% /* FOOT */
 function foot_object = draw_foot
 import animorph.*;
 

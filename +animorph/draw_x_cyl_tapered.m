@@ -1,3 +1,7 @@
+function tapered_cylinder = draw_x_cyl_tapered(radius_1, radius_2, geon_length)
+import animorph.*;
+
+global surface_colour;
 % %/*
 %   TAPERED CYLINDER
 %   A quadrilateral-strip linearly-tapered cylinder that
@@ -9,11 +13,6 @@
 %%% but the built-in Matlab cylinder function draws along the z-axis.
 %%% Therefore, we need to rotate this cylinder, to make it compatible
 %%% with all the other functions that use it (leg-drawing, etc.)
-
-function tapered_cylinder = draw_x_cyl_tapered(radius_1, radius_2, geon_length)
-import animorph.*;
-
-global surface_colour;
 
 hold on;
 

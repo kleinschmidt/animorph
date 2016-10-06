@@ -1,4 +1,3 @@
-%%%%%%%%%%%%%%/* HEAD: */
 function entire_head = draw_head
 import animorph.*;
 

@@ -1,4 +1,22 @@
-% make 2D array of animals by specifying origin and two directions.
+% Visualize 2D array of animals, specifying origin and two directions.
+% 
+% Input:
+%   origin: Animal parameter vector for the origin
+%   animal_1: Parameter vector; origin-animal_1 defines the x-axis
+%   animal_2: Parameter vector; origin-animal_2 defines the y-axis
+%   tile_res: Resolution of each tile
+%   ntiles: Number of tiles in each direction
+%   axis_limits: For capturing subregion of image (if animals are too small
+%     or large)
+%   dist_lambda_range: Defaults to [0, 1]. Range of distances along the axes
+%     from origin and animal_1/animal_2 to cover.
+%   angle_lambda_range: range, in radians, of angles from the origin-animal_1
+%     axis and origin-animal_2 axis to cover. Defaults to [0, pi/2]
+% 
+% Output:
+%   animal_array: Assembled grid of animal images.
+%   tiles: Cell array of individual tile images
+%   params: Parameters for each tile
 function [animal_array, tiles, params] = make_animal_array(origin, animal_1, animal_2, ...
     tile_res, ntiles, axis_limits, dist_lambda_range, angle_lambda_range)
     

@@ -1,4 +1,3 @@
-% /* TAIL */
 function tail_object = draw_tail
 import animorph.*;
 

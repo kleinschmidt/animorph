@@ -1,4 +1,3 @@
-% THIGH
 function thigh = draw_thigh
 import animorph.*;
 

@@ -1,10 +1,10 @@
-% /*
-%   BODY is two ellipsoids: chest and abdomen.
-%   */
 function entire_body = draw_body
 import animorph.*;
 
 global shape_params
+% /*
+%   BODY is two ellipsoids: chest and abdomen.
+%   */
 
 animal_size = shape_params(find(strcmp({shape_params.name},'size'))).value;
 abdomen_length = shape_params(find(strcmp({shape_params.name},'abd length'))).value;
