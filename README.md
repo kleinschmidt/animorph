@@ -27,6 +27,57 @@ import animorph.*;
 make_animal(shape_params)
 ```
 
+## Documentation
+
+Help is available through the standard matlab `help`. To view a summary of all
+the documented functions that are provided by the package:
+
+```matlab
+help animorph
+```
+```
+Contents of animorph:
+
+animal_parameter_sliders_gui   - Launch GUI to generate animals based on parameter values set via sliders
+assemble_tiles                 - Assemble a cell array of individual images into a single image, and plot
+draw_geon_pure_matlab          - Draw a generalized cylinder
+grab_animal_im                 - Capture contents of figure as image CDATA.
+make_animal                    - Draw an animal based on parameters and (optionally) view factors
+make_animal_array              - Visualize 2D array of animals, specifying origin and two directions.
+morph_between_two_animals_gui  - GUI for morphing between two animals, from parameter structs loaded from
+normalized_param_vector_to_struct - Convert param values in [0,1] to struct with actual ranges.
+normalized_param_vector_to_vector - Convert param values in [0,1] to vector with actual ranges.
+opengl_cdata                   - Get CDATA from hardcopy using opengl
+param_struct_to_vector         - Extract parameter values, names, and ranges from struct
+param_vector_to_normalized_vector - Convert parameters to normalized values in [0,1] based on range
+param_vector_to_struct         - Convert vector of params to struct (suitable for drawing)
+xy_to_animal_image             - Generate image for animal based on cartesian coordinates in animal space
+```
+
+To get the documentation for an individual function:
+
+```matlab
+help animorph.make_animal
+```
+```
+  Draw an animal based on parameters and (optionally) view factors
+  
+  function make_animal(params, color, fig_h, rotation, zoom_factor)
+  
+  Input:
+    params: A parameter struct (see shape_params_struct_def.m).
+    color: RGB vector in [0,1] (optional, defaults to global value, then
+      [1 0.65 0.1]).
+    fig_h: Handle of figure to draw to (optional, defaults to 1)
+    rotation: Rotation about z and y axes. (Optional, defaults to 0)
+    zoom_factor: Optional, default is 1.8 (trims off dead space around animal
+      in default view).
+  Output:
+    none.
+  Side effect: 
+    Image is drawn to fig_h. Use grab_animal_im to capture image in CDATA array.
+```
+
 ## Interface
 
 Animals are defined by a parameter struct, which can be passed to most functions
